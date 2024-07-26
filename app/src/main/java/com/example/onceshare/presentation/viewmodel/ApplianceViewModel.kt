@@ -1,21 +1,15 @@
 package com.example.onceshare.presentation.viewmodel
 
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.example.onceshare.data.model.Appliance
+import com.example.onceshare.data.model.Booking
 import com.example.onceshare.domain.usecases.AddApplianceUseCase
 import com.example.onceshare.domain.usecases.GetAppliancesUseCase
 import com.example.onceshare.domain.usecases.GetBookingsByApplianceUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -28,6 +22,9 @@ class ApplianceViewModel @Inject constructor(
 
     val searchQuery = MutableStateFlow("")
     private val _appliances = MutableStateFlow<List<Appliance>>(emptyList())
+    private val _selectedAppliance = MutableStateFlow<Appliance?>(null)
+    private val _bookings = MutableStateFlow<List<Booking>>(emptyList())
+
     @OptIn(ExperimentalCoroutinesApi::class)
     val appliances: StateFlow<List<Appliance>> = searchQuery
         .flatMapLatest { query ->
@@ -63,13 +60,18 @@ class ApplianceViewModel @Inject constructor(
         }
     }
 
-    fun getApplianceById(applianceId: String): Appliance? {
-        // Fetch appliance by ID logic (assuming the appliances list is already fetched and stored in _appliances)
-        return _appliances.value.find { it.id == applianceId }
+    fun getApplianceById(applianceId: String): StateFlow<Appliance?> {
+        viewModelScope.launch {
+            _selectedAppliance.value = _appliances.value.find { it.id == applianceId }
+        }
+        return _selectedAppliance
     }
 
-    fun getBookingsByAppliance(applianceId: String) = liveData {
-        val result = getBookingsByApplianceUseCase(applianceId)
-        emit(result.getOrNull() ?: emptyList())
+    fun getBookingsByAppliance(applianceId: String): StateFlow<List<Booking>> {
+        viewModelScope.launch {
+            val result = getBookingsByApplianceUseCase(applianceId)
+            _bookings.value = result.getOrNull() ?: emptyList()
+        }
+        return _bookings
     }
 }

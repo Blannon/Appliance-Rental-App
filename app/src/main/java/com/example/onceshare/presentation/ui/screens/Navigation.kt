@@ -11,17 +11,17 @@ import androidx.navigation.navArgument
 @Composable
 fun Navigation() {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = "home") {
+    NavHost(navController = navController, startDestination = "signup") {
         composable("login") { LoginScreen(navController) }
         composable("signup") { SignUpScreen(navController) }
         composable("home") { HomeScreen(navController) }
         composable("add_appliance") { AddApplianceScreen(navController) }
-       // composable("appliance_list") { ApplianceListScreen(navController) }
+       composable("appliance_list") { ApplianceListScreen(navController) }
         composable(
             "appliance_detail/{applianceId}",
             arguments = listOf(navArgument("applianceId") { type = NavType.StringType })
-        ) { //backStackEntry ->
-            //ApplianceDetailScreen(navController, backStackEntry.arguments?.getString("applianceId") ?: "")
+        ) { backStackEntry ->
+           ApplianceDetailScreen(navController, backStackEntry.arguments?.getString("applianceId") ?: "")
         }
         composable(
             "booking/{applianceId}",

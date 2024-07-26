@@ -1,9 +1,7 @@
 package com.example.onceshare.presentation.ui.screens
 
-
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
-
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,12 +15,15 @@ import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.onceshare.data.model.Appliance
 import com.example.onceshare.presentation.viewmodel.ApplianceViewModel
 
@@ -37,8 +38,10 @@ fun AddApplianceScreen(navController: NavController) {
     val context = LocalContext.current
 
     Column(
-        modifier = Modifier.fillMaxSize().padding(16.dp),
-        //horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
         TextField(
@@ -98,4 +101,10 @@ fun AddApplianceScreen(navController: NavController) {
             Text("Add Appliance")
         }
     }
+}
+
+@Composable
+@Preview(showBackground = true, showSystemUi = true)
+fun AddAppliancePreview() {
+    AddApplianceScreen(navController = rememberNavController())
 }

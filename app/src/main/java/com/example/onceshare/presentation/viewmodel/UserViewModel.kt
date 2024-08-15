@@ -18,6 +18,8 @@ class UserViewModel @Inject constructor(
 
     fun getUserById(userId: String) = liveData {
         val result = getUserByIdUseCase(userId)
+        val dummyUser = User(id = "123", name = "John Doe", email = "john@example.com", profilePictureUrl = "https://example.com/john.jpg")
+        emit(dummyUser)
         emit(result.getOrNull())
     }
 

@@ -1,5 +1,6 @@
 package com.example.onceshare.di
 
+import android.content.Context
 import com.example.onceshare.data.repository.ApplianceRepository
 import com.example.onceshare.data.repository.AuthRepository
 import com.example.onceshare.domain.usecases.AddApplianceUseCase
@@ -8,9 +9,11 @@ import com.example.onceshare.domain.usecases.LoginUseCase
 import com.example.onceshare.domain.usecases.SignUpUseCase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 
 @Module
@@ -24,14 +27,18 @@ object AppModule {
     fun provideFirebaseFirestore(): FirebaseFirestore = FirebaseFirestore.getInstance()
 
     @Provides
+    fun provideFirebaseStorage(): FirebaseStorage = FirebaseStorage.getInstance()
+
+    @Provides
     fun provideAuthRepository(
         firebaseAuth: FirebaseAuth
     ): AuthRepository = AuthRepository(firebaseAuth)
 
     @Provides
     fun provideApplianceRepository(
-        firestore: FirebaseFirestore
-    ): ApplianceRepository = ApplianceRepository(firestore)
+        firestore: FirebaseFirestore,
+        storage: FirebaseStorage
+    ): ApplianceRepository = ApplianceRepository(firestore, storage)
 
     @Provides
     fun provideLoginUseCase(
@@ -53,4 +60,3 @@ object AppModule {
         applianceRepository: ApplianceRepository
     ): GetAppliancesUseCase = GetAppliancesUseCase(applianceRepository)
 }
-

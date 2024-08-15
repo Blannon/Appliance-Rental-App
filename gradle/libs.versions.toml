@@ -1,14 +1,18 @@
 [versions]
-agp = "8.5.1"
-hiltAndroid = "2.44"
-hiltAndroidGradlePlugin = "2.44"
+accompanistPermissions = "0.35.1"
+accompanistSystemuicontroller = "0.27.0"
+agp = "8.5.2"
+coilCompose = "2.7.0"
+coreSplashscreen = "1.0.1"
+hiltAndroid = "2.49"
+hiltAndroidGradlePlugin = "2.48"
 hiltAndroidGradlePluginVersion = "2.48"
-hiltAndroidVersion = "2.48"
-hiltCompiler = " 2.44"
+hiltAndroidVersion = "2.49"
+hiltCompiler = " 2.48"
 hiltCompilerVersion = "2.48"
 hiltNavigationCompose = "1.2.0"
-kotlinxCoroutinesAndroid = "1.7.3"
-kotlinxCoroutinesCore = "1.6.4"
+kotlinxCoroutinesAndroid = "1.8.1"
+kotlinxCoroutinesCore = "1.8.1"
 
 kotlin = "1.9.0"
 
@@ -16,22 +20,35 @@ coreKtx = "1.13.1"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
-lifecycleRuntimeKtx = "2.8.3"
-activityCompose = "1.9.0"
+lifecycleRuntimeKtx = "2.8.4"
+activityCompose = "1.9.1"
 composeBom = "2024.06.00"
 firebaseAuthKtx = "23.0.0"
-lifecycleViewmodelKtx = "2.8.3"
+lifecycleViewmodelKtx = "2.8.4"
+materialIconsExtended = "1.6.8"
 navigationCompose = "2.7.7"
 firebaseFirestoreKtx = "25.0.0"
 runtimeLivedata = "1.6.8"
 googleGmsGoogleServices = "4.4.2"
+firebaseStorageKtx = "21.0.0"
+streamChatAndroidCompose = "6.4.3"
+streamChatAndroidOffline = "6.4.3"
+appcompat = "1.6.1"
+material = "1.10.0"
+activity = "1.9.1"
+constraintlayout = "2.1.4"
 
 [libraries]
 
+accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version = "0.35.1-alpha" }
+accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanistSystemuicontroller" }
+androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
 androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
+androidx-material-icons-extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "materialIconsExtended" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
+coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
 firebase-auth = { module = "com.google.firebase:firebase-auth" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
 hilt-android-gradle-plugin = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "hiltAndroidGradlePlugin" }
@@ -57,6 +74,13 @@ kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutine
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesCore" }
 firebase-firestore-ktx = { group = "com.google.firebase", name = "firebase-firestore-ktx", version.ref = "firebaseFirestoreKtx" }
 androidx-runtime-livedata = { group = "androidx.compose.runtime", name = "runtime-livedata", version.ref = "runtimeLivedata" }
+firebase-storage-ktx = { group = "com.google.firebase", name = "firebase-storage-ktx", version.ref = "firebaseStorageKtx" }
+stream-chat-android-compose = { module = "io.getstream:stream-chat-android-compose", version.ref = "streamChatAndroidCompose" }
+stream-chat-android-offline = { module = "io.getstream:stream-chat-android-offline", version.ref = "streamChatAndroidOffline" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
+androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

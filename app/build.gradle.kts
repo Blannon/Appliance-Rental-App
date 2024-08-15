@@ -67,6 +67,10 @@ dependencies {
     implementation(libs.firebase.auth.ktx)
     implementation(libs.firebase.firestore.ktx)
     implementation(libs.androidx.runtime.livedata)
+    implementation(libs.firebase.storage.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
+    implementation(libs.androidx.constraintlayout)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -74,6 +78,7 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    implementation ("androidx.activity:activity:1.9.1")
 
     //ViewModel
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
@@ -84,7 +89,7 @@ dependencies {
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
 
-            implementation(libs.hilt.android.gradle.plugin)
+    implementation(libs.hilt.android.gradle.plugin)
 
     // Coroutine
     implementation (libs.kotlinx.coroutines.core)
@@ -97,6 +102,24 @@ dependencies {
     ksp(libs.hilt.compiler.v248)
 
     implementation (libs.androidx.hilt.navigation.compose)
+
+        //image handling
+    implementation (libs.coil.compose)
+    implementation (libs.accompanist.permissions)
+
+    //SplashScreen
+    implementation(libs.androidx.core.splashscreen)
+
+    implementation(libs.accompanist.systemuicontroller)
+
+    //
+    implementation ("com.google.android.gms:play-services-base:18.5.0")
+
+    //steam
+    implementation(libs.stream.chat.android.compose)
+    implementation(libs.stream.chat.android.offline)
+
+    implementation(libs.androidx.material.icons.extended)
 
 
 

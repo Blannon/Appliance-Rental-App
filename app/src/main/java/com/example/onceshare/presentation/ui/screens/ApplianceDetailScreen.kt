@@ -1,14 +1,18 @@
 package com.example.onceshare.presentation.ui.screens
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import coil.compose.rememberAsyncImagePainter
+import coil.compose.rememberImagePainter
 import com.example.onceshare.data.model.Booking
 import com.example.onceshare.presentation.viewmodel.ApplianceViewModel
 
@@ -24,7 +28,20 @@ fun ApplianceDetailScreen(navController: NavController, applianceId: String) {
             .fillMaxSize()
             .padding(16.dp)
     ) {
+
         appliance?.let { appliance ->
+            appliance.imageUri?.let { uri ->
+                Image(
+                    painter = rememberAsyncImagePainter(uri),
+                    contentDescription = "Appliance Image",
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(200.dp),
+                    contentScale = ContentScale.Crop
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+            }
+
             Text(appliance.name, style = MaterialTheme.typography.headlineMedium)
             Spacer(modifier = Modifier.height(8.dp))
             Text(appliance.description)

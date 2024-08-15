@@ -1,5 +1,6 @@
 package com.example.onceshare.presentation.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.onceshare.data.model.Appliance
@@ -7,17 +8,22 @@ import com.example.onceshare.data.model.Booking
 import com.example.onceshare.domain.usecases.AddApplianceUseCase
 import com.example.onceshare.domain.usecases.GetAppliancesUseCase
 import com.example.onceshare.domain.usecases.GetBookingsByApplianceUseCase
+import com.example.onceshare.data.repository.ApplianceRepository
+import com.google.firebase.Firebase
+import com.google.firebase.storage.storage
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 @HiltViewModel
 class ApplianceViewModel @Inject constructor(
     private val addApplianceUseCase: AddApplianceUseCase,
     private val getAppliancesUseCase: GetAppliancesUseCase,
-    private val getBookingsByApplianceUseCase: GetBookingsByApplianceUseCase
+    private val getBookingsByApplianceUseCase: GetBookingsByApplianceUseCase,
+    private val applianceRepository: ApplianceRepository // Inject the repository
 ) : ViewModel() {
 
     val searchQuery = MutableStateFlow("")
@@ -74,4 +80,16 @@ class ApplianceViewModel @Inject constructor(
         }
         return _bookings
     }
+
+    fun getImageUrl(imagePath: String): Flow<String> = flow {
+        try {
+            val storageRef = Firebase.storage.reference.child(imagePath)
+            val downloadUrl = storageRef.downloadUrl.await()
+            emit(downloadUrl.toString())
+        } catch (e: Exception) {
+            Log.e("ApplianceViewModel", "Error fetching image URL", e)
+            emit("")
+        }
+    }
+
 }
